@@ -3,33 +3,33 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     /// <summary>ç∂âEà⁄ìÆÇ∑ÇÈóÕ</summary>
-    [SerializeField] float m_movePower = 10f;
+    [SerializeField] float movePower = 10f;
     /// <summary>ÉWÉÉÉìÉvÇ∑ÇÈóÕ</summary>
-    [SerializeField] float m_jumpPower = 15f;
-    Rigidbody2D m_rb = default;
-    float m_h;
+    [SerializeField] float jumpPower = 15f;
+    Rigidbody2D rb = default;
+    float h;
     bool nidan = false;
 
     void Start()
     {
-        m_rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        m_h = Input.GetAxisRaw("Horizontal");
+        h = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetButtonDown("Jump"))
         {
             if (checkground)
             {
                 nidan = true;
-                m_rb.AddForce(Vector2.up * m_jumpPower, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             }
             else if (nidan)
             {
                 nidan = false;
-                m_rb.AddForce(Vector2.up * m_jumpPower, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             }
         }
     }
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         // óÕÇâ¡Ç¶ÇÈ
-        m_rb.AddForce(Vector2.right * m_h * m_movePower, ForceMode2D.Force);
+        rb.AddForce(Vector2.right * h * movePower, ForceMode2D.Force);
     }
 
 
